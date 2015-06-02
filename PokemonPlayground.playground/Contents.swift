@@ -1,4 +1,4 @@
-//: Playground - noun: a place where people can play
+//: Pokemon Battle Simulator
 
 import UIKit
 
@@ -38,25 +38,73 @@ class Torterra : Turtwig {
   let type2 = "ground"
 }
 
-let pikachu = Pokemon(characterName: "Pikachu", characterHealth: 35, characterAttack: 55, characterDefense: 40)
+var pikachu = Pokemon(characterName: "Pikachu", characterHealth: 35, characterAttack: 55, characterDefense: 40)
 
-let jigglypuff = Jigglypuff(characterName: "Jigglypuff", characterHealth: 115, characterAttack: 45, characterDefense: 20)
+var jigglypuff = Jigglypuff(characterName: "Jigglypuff", characterHealth: 115, characterAttack: 45, characterDefense: 20)
 
-let wigglytuff = Jigglypuff(characterName: "Wigglytuff", characterHealth: 140, characterAttack: 70, characterDefense: 45)
+var wigglytuff = Jigglypuff(characterName: "Wigglytuff", characterHealth: 140, characterAttack: 70, characterDefense: 45)
 
-let abra = Abra(characterName: "Abra", characterHealth: 25, characterAttack: 20, characterDefense: 15)
+var abra = Abra(characterName: "Abra", characterHealth: 25, characterAttack: 20, characterDefense: 15)
 
-let kadabra = Abra(characterName: "Kadabra", characterHealth: 40, characterAttack: 35, characterDefense: 30)
+var kadabra = Abra(characterName: "Kadabra", characterHealth: 40, characterAttack: 35, characterDefense: 30)
 
-let alakazam = Abra(characterName: "Alakazam", characterHealth: 55, characterAttack: 50, characterDefense: 45)
+var alakazam = Abra(characterName: "Alakazam", characterHealth: 55, characterAttack: 50, characterDefense: 45)
 
-let tentacool = Tentacool(characterName: "Tentacool", characterHealth: 40, characterAttack: 40, characterDefense: 35)
+var tentacool = Tentacool(characterName: "Tentacool", characterHealth: 40, characterAttack: 40, characterDefense: 35)
 
-let turtwig = Turtwig(characterName: "Turtwig", characterHealth: 55, characterAttack: 68, characterDefense: 64)
+var turtwig = Turtwig(characterName: "Turtwig", characterHealth: 55, characterAttack: 68, characterDefense: 64)
 
-let grotle = Turtwig(characterName: "Grotle", characterHealth: 75, characterAttack: 89, characterDefense: 85)
+var grotle = Turtwig(characterName: "Grotle", characterHealth: 75, characterAttack: 89, characterDefense: 85)
 
-let torterra = Torterra(characterName: "Torterra", characterHealth: 95, characterAttack: 109, characterDefense: 105)
+var torterra = Torterra(characterName: "Torterra", characterHealth: 95, characterAttack: 109, characterDefense: 105)
+
+func battle(pokemonA: Pokemon, pokemonB: Pokemon){
+  let pokemonAAttack = pokemonA.attack
+  let pokemonBAttack = pokemonB.attack
+  let pokemonADefense = pokemonA.defense
+  let pokemonBDefense = pokemonB.defense
+  var pokemonAHealth = pokemonA.health
+  var pokemonBHealth = pokemonB.health
+  
+  let randomNum = arc4random_uniform(2)
+  
+  var battleContinues: Bool = true
+  
+  if (pokemonA.health <= 0 || pokemonB.health <= 0) {
+    battleContinues = false
+    if (pokemonA.health <= 0) {
+      println("\(pokemonA.name) has died. \(pokemonB.name) is the winner.")
+    } else if (pokemonB.health <= 0) {
+      println("\(pokemonB.name) has died. \(pokemonA.name) is the winner.")
+    }
+  }
+  
+  func attack(attacker: Pokemon, defender: Pokemon) {
+    println("\(attacker.name) strikes first")
+    var impact: Int = attacker.attack - defender.defense
+    if (impact > 0) {
+      var newDefenderHealth = defender.health - impact
+      defender.health = newDefenderHealth
+      if (newDefenderHealth <= 0) {
+        println("\(defender.name) has died")
+      }
+    }
+  }
+  
+  if (randomNum == 0) {
+    attack(pokemonA, pokemonB)
+    
+  } else if (randomNum == 1) {
+    attack(pokemonB, pokemonA)
+  }
+  
+  
+  while (battleContinues) {
+    
+  }
+}
+
+battle(jigglypuff, pikachu)
 
 
 
