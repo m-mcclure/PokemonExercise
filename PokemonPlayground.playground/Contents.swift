@@ -96,11 +96,9 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
       if (newDefenderHealth <= 0) {
         battleContinues = false
         finalMessage = "\(defender.name) has died. \(attacker.name) is the winner."
-        
       }
     } else if (impact <= 0) {
       finalMessage = "\(attacker.name) has died. \(defender.name) is the winner."
-      
       battleContinues = false
     }
   }
@@ -115,7 +113,6 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
 }
 
 //battle(grotle, jigglypuff)
-
 
 var pokemonPen: [Pokemon] = [pikachu, jigglypuff, wigglytuff, abra, kadabra, alakazam, tentacool, turtwig, grotle, torterra]
 
