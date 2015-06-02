@@ -17,7 +17,6 @@ class Pokemon {
   
   /* how to automatically append to array from here?
   func appendToArray(Pokemon) {
-    
   }
   */
 }
@@ -64,6 +63,8 @@ var grotle = Turtwig(characterName: "Grotle", characterHealth: 75, characterAtta
 
 var torterra = Torterra(characterName: "Torterra", characterHealth: 95, characterAttack: 109, characterDefense: 105)
 
+var finalMessage: String = ""
+
 func battle(pokemonA: Pokemon, pokemonB: Pokemon){
   let pokemonAAttack = pokemonA.attack
   let pokemonBAttack = pokemonB.attack
@@ -94,10 +95,12 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
       defender.health = newDefenderHealth
       if (newDefenderHealth <= 0) {
         battleContinues = false
-        println("\(defender.name) has died.")
+        finalMessage = "\(defender.name) has died. \(attacker.name) is the winner."
+        
       }
     } else if (impact <= 0) {
-      println("\(attacker.name) is too weak to put a dent in \(defender.name). \(attacker.name) has died.")
+      finalMessage = "\(attacker.name) has died. \(defender.name) is the winner."
+      
       battleContinues = false
     }
   }
@@ -105,14 +108,13 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
   while (battleContinues) {
     if (randomNum == 0) {
       attack(pokemonA, pokemonB)
-      
     } else if (randomNum == 1) {
       attack(pokemonB, pokemonA)
     }
   }
 }
 
-battle(grotle, jigglypuff)
+//battle(grotle, jigglypuff)
 
 
 var pokemonPen: [Pokemon] = [pikachu, jigglypuff, wigglytuff, abra, kadabra, alakazam, tentacool, turtwig, grotle, torterra]
@@ -131,14 +133,18 @@ func generateTwoRandomNumbers(){
 
 generateTwoRandomNumbers()
 
-
-
 func tournament(contenderA: Pokemon, contenderB: Pokemon) {
+  let pokemonA = contenderA
+  let pokemonB = contenderB
   println("\(contenderA.name) will fight \(contenderB.name).")
-  battle(contenderA, contenderB)
+  battle(pokemonA, pokemonB)
+  println(finalMessage)
 }
 
 tournament(pokemonPen[rand1], pokemonPen[rand2])
+
+
+
 
 
 
