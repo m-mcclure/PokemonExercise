@@ -14,6 +14,12 @@ class Pokemon {
     self.attack = characterAttack
     self.defense = characterDefense
   }
+  
+  /* how to automatically append to array from here?
+  func appendToArray(Pokemon) {
+    
+  }
+  */
 }
 
 class Jigglypuff : Pokemon {
@@ -108,6 +114,31 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
 
 battle(grotle, jigglypuff)
 
+
+var pokemonPen: [Pokemon] = [pikachu, jigglypuff, wigglytuff, abra, kadabra, alakazam, tentacool, turtwig, grotle, torterra]
+
+var playersRemaining = UInt32(pokemonPen.count)
+
+var rand1: Int!
+var rand2: Int!
+
+func generateTwoRandomNumbers(){
+  do {
+  rand1 = Int(arc4random_uniform(playersRemaining))
+  rand2 = Int(arc4random_uniform(playersRemaining))
+  } while (rand1 == rand2)
+}
+
+generateTwoRandomNumbers()
+
+
+
+func tournament(contenderA: Pokemon, contenderB: Pokemon) {
+  println("\(contenderA.name) will fight \(contenderB.name).")
+  battle(contenderA, contenderB)
+}
+
+tournament(pokemonPen[rand1], pokemonPen[rand2])
 
 
 
