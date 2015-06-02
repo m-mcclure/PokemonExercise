@@ -90,16 +90,9 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
         battleContinues = false
         println("\(defender.name) has died.")
       }
-    } else {
-      var retaliation: Int = defender.attack - attacker.defense
-      if (retaliation > 0) {
-        var newAttackerHealth = attacker.health - retaliation
-        if (newAttackerHealth <= 0) {
-          battleContinues = false
-          println("\(attacker.name) has died.")
-        }
-        
-      }
+    } else if (impact <= 0) {
+      println("\(attacker.name) is too weak to put a dent in \(defender.name). \(attacker.name) has died.")
+      battleContinues = false
     }
   }
   
@@ -113,7 +106,9 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
   }
 }
 
-battle(pikachu, abra)
+battle(grotle, jigglypuff)
+
+
 
 
 
