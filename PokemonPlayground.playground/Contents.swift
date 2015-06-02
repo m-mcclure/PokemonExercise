@@ -75,6 +75,7 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
     if (pokemonA.health <= 0) {
       println("\(pokemonA.name) has died. \(pokemonB.name) is the winner.")
     } else if (pokemonB.health <= 0) {
+      battleContinues = false
       println("\(pokemonB.name) has died. \(pokemonA.name) is the winner.")
     }
   }
@@ -86,25 +87,34 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
       var newDefenderHealth = defender.health - impact
       defender.health = newDefenderHealth
       if (newDefenderHealth <= 0) {
-        println("\(defender.name) has died")
+        battleContinues = false
+        println("\(defender.name) has died.")
+      }
+    } else {
+      var retaliation: Int = defender.attack - attacker.defense
+      if (retaliation > 0) {
+        var newAttackerHealth = attacker.health - retaliation
+        if (newAttackerHealth <= 0) {
+          battleContinues = false
+          println("\(attacker.name) has died.")
+        }
+        
       }
     }
   }
   
-  if (randomNum == 0) {
-    attack(pokemonA, pokemonB)
-    
-  } else if (randomNum == 1) {
-    attack(pokemonB, pokemonA)
-  }
-  
-  
   while (battleContinues) {
-    
+    if (randomNum == 0) {
+      attack(pokemonA, pokemonB)
+      
+    } else if (randomNum == 1) {
+      attack(pokemonB, pokemonA)
+    }
   }
 }
 
-battle(jigglypuff, pikachu)
+battle(pikachu, abra)
+
 
 
 
