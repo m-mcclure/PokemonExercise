@@ -124,6 +124,7 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
       battleContinues = false
     }
   }
+  //randomly selects which character strikes next
   while (battleContinues) {
     if (randomNum == 0) {
       attack(pokemonA, pokemonB)
