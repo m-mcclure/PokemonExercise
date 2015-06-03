@@ -1,7 +1,9 @@
 //: Pokemon Battle Simulator
+//: Matthew McClure, F2 iOS June 2015, Code Fellows
 
 import UIKit
 
+//create character classes
 class Pokemon {
   var name: String = "name"
   var health: Int = 0
@@ -14,9 +16,6 @@ class Pokemon {
     self.attack = characterAttack
     self.defense = characterDefense
   }
-  /* how to automatically append to array from here?
-  func appendToArray(Pokemon) {
-  }*/
 }
 
 class Jigglypuff : Pokemon {
@@ -41,9 +40,15 @@ class Torterra : Turtwig {
   let type2 = "ground"
 }
 
+//create array of characters in first round
 var pokemonPen: [Pokemon]!
 pokemonPen = [Pokemon]()
 
+//winners of previous round stored in this array
+var nextRoundPen: [Pokemon]!
+nextRoundPen = [Pokemon]()
+
+//create characters
 var pikachu = Pokemon(characterName: "Pikachu", characterHealth: 35, characterAttack: 55, characterDefense: 40)
 pokemonPen.append(pikachu)
 
@@ -74,6 +79,8 @@ pokemonPen.append(grotle)
 var torterra = Torterra(characterName: "Torterra", characterHealth: 95, characterAttack: 109, characterDefense: 105)
 pokemonPen.append(torterra)
 
+
+//check to see if all created characters were added to array
 pokemonPen.count
 
 var finalMessage: String = ""
@@ -93,10 +100,10 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
   if (pokemonA.health <= 0 || pokemonB.health <= 0) {
     battleContinues = false
     if (pokemonA.health <= 0) {
-      println("\(pokemonA.name) has died. \(pokemonB.name) is the winner.")
+      println("\(pokemonA.name) is dead. \(pokemonB.name) is the winner.")
     } else if (pokemonB.health <= 0) {
       battleContinues = false
-      println("\(pokemonB.name) has died. \(pokemonA.name) is the winner.")
+      println("\(pokemonB.name) is dead. \(pokemonA.name) is the winner.")
     }
   }
   
@@ -107,13 +114,13 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
       var newDefenderHealth = defender.health - impact
       defender.health = newDefenderHealth
       if (newDefenderHealth <= 0) {
-        pokemonPen.append(attacker)
+        nextRoundPen.append(attacker)
         battleContinues = false
         finalMessage = "\(defender.name) has died. \(attacker.name) is the winner."
       }
     } else if (impact <= 0) {
       finalMessage = "\(attacker.name) has died. \(defender.name) is the winner."
-      pokemonPen.append(defender)
+      nextRoundPen.append(defender)
       battleContinues = false
     }
   }
@@ -127,8 +134,7 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
   }
 }
 
-//battle(grotle, jigglypuff)
-
+//create Ints for use in randomization function
 var playersRemaining = UInt32(pokemonPen.count)
 
 var rand1: Int!
@@ -141,6 +147,7 @@ func generateTwoRandomNumbers(){
   } while (rand1 == rand2)
 }
 
+//main function through which all others flow
 func tournament(contenderA: Pokemon, contenderB: Pokemon) {
   let pokemonA = contenderA
   let pokemonB = contenderB
@@ -151,15 +158,14 @@ func tournament(contenderA: Pokemon, contenderB: Pokemon) {
   println(finalMessage)
 }
 
-var i = 10
-
+//select two random opponents and watch them fight
   generateTwoRandomNumbers()
   tournament(pokemonPen[rand1], pokemonPen[rand2])
-  pokemonPen.count
 
-/* how to create loop that will continue tournament process until one player remains?
-*/
+//ends here
 
+
+//next challenge: create way to automatically move on to next round until only one champion remains; factor character "types" into play
 
 
 
