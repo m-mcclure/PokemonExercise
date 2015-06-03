@@ -124,7 +124,6 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
       battleContinues = false
     }
   }
-  
   while (battleContinues) {
     if (randomNum == 0) {
       attack(pokemonA, pokemonB)
@@ -136,7 +135,6 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
 
 //create Ints for use in randomization function
 var playersRemaining = UInt32(pokemonPen.count)
-
 var rand1: Int!
 var rand2: Int!
 
