@@ -14,11 +14,9 @@ class Pokemon {
     self.attack = characterAttack
     self.defense = characterDefense
   }
-  
   /* how to automatically append to array from here?
   func appendToArray(Pokemon) {
-  }
-  */
+  }*/
 }
 
 class Jigglypuff : Pokemon {
@@ -43,25 +41,40 @@ class Torterra : Turtwig {
   let type2 = "ground"
 }
 
+var pokemonPen: [Pokemon]!
+pokemonPen = [Pokemon]()
+
 var pikachu = Pokemon(characterName: "Pikachu", characterHealth: 35, characterAttack: 55, characterDefense: 40)
+pokemonPen.append(pikachu)
 
 var jigglypuff = Jigglypuff(characterName: "Jigglypuff", characterHealth: 115, characterAttack: 45, characterDefense: 20)
+pokemonPen.append(jigglypuff)
 
 var wigglytuff = Jigglypuff(characterName: "Wigglytuff", characterHealth: 140, characterAttack: 70, characterDefense: 45)
+pokemonPen.append(wigglytuff)
 
 var abra = Abra(characterName: "Abra", characterHealth: 25, characterAttack: 20, characterDefense: 15)
+pokemonPen.append(abra)
 
 var kadabra = Abra(characterName: "Kadabra", characterHealth: 40, characterAttack: 35, characterDefense: 30)
+pokemonPen.append(kadabra)
 
 var alakazam = Abra(characterName: "Alakazam", characterHealth: 55, characterAttack: 50, characterDefense: 45)
+pokemonPen.append(alakazam)
 
 var tentacool = Tentacool(characterName: "Tentacool", characterHealth: 40, characterAttack: 40, characterDefense: 35)
+pokemonPen.append(tentacool)
 
 var turtwig = Turtwig(characterName: "Turtwig", characterHealth: 55, characterAttack: 68, characterDefense: 64)
+pokemonPen.append(turtwig)
 
 var grotle = Turtwig(characterName: "Grotle", characterHealth: 75, characterAttack: 89, characterDefense: 85)
+pokemonPen.append(grotle)
 
 var torterra = Torterra(characterName: "Torterra", characterHealth: 95, characterAttack: 109, characterDefense: 105)
+pokemonPen.append(torterra)
+
+pokemonPen.count
 
 var finalMessage: String = ""
 
@@ -94,11 +107,13 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
       var newDefenderHealth = defender.health - impact
       defender.health = newDefenderHealth
       if (newDefenderHealth <= 0) {
+        pokemonPen.append(attacker)
         battleContinues = false
         finalMessage = "\(defender.name) has died. \(attacker.name) is the winner."
       }
     } else if (impact <= 0) {
       finalMessage = "\(attacker.name) has died. \(defender.name) is the winner."
+      pokemonPen.append(defender)
       battleContinues = false
     }
   }
@@ -114,8 +129,6 @@ func battle(pokemonA: Pokemon, pokemonB: Pokemon){
 
 //battle(grotle, jigglypuff)
 
-var pokemonPen: [Pokemon] = [pikachu, jigglypuff, wigglytuff, abra, kadabra, alakazam, tentacool, turtwig, grotle, torterra]
-
 var playersRemaining = UInt32(pokemonPen.count)
 
 var rand1: Int!
@@ -128,18 +141,24 @@ func generateTwoRandomNumbers(){
   } while (rand1 == rand2)
 }
 
-generateTwoRandomNumbers()
-
 func tournament(contenderA: Pokemon, contenderB: Pokemon) {
   let pokemonA = contenderA
   let pokemonB = contenderB
   println("\(contenderA.name) will fight \(contenderB.name).")
+  pokemonPen.removeAtIndex(rand1)
+  pokemonPen.removeAtIndex(rand2)
   battle(pokemonA, pokemonB)
   println(finalMessage)
 }
 
-tournament(pokemonPen[rand1], pokemonPen[rand2])
+var i = 10
 
+  generateTwoRandomNumbers()
+  tournament(pokemonPen[rand1], pokemonPen[rand2])
+  pokemonPen.count
+
+/* how to create loop that will continue tournament process until one player remains?
+*/
 
 
 
